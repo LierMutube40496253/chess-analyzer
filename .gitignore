@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+mobile/node_modules/
+
+# Environment variables - NEVER commit these
+.env
+.env.local
+.env.*.local
+
+# Python
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Old source folder
+src/
+
+# Build output
+frontend/dist/
+mobile/.expo/
+mobile/dist/
+
+# Logs
+*.log
+analysis_log.txt
+
+# OS / misc
+.DS_Store
+Thumbs.db
+*.png
+*.jpg

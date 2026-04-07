@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: chess-analyzer-api
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: LLM_PROVIDER
+        value: gemini
+      - key: GEMINI_API_KEY
+        sync: false          # you set this in Render dashboard
+      - key: GEMINI_MODEL
+        value: gemini-1.5-flash
+      - key: STOCKFISH_PATH
+        value: /usr/games/stockfish
+      - key: DEBUG
+        value: false
