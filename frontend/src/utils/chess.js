@@ -18,7 +18,7 @@ export function parsePGN(pgn) {
 
   const board = new Chess()
   for (const move of history) {
-    board.move(move)
+    board.move(move.san)
     positions.push({
       fen: board.fen(),
       san: move.san,

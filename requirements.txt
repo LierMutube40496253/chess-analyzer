@@ -4,5 +4,9 @@ requests
 python-chess
 anthropic
 groq
-google-generativeai
+google-genai
+huggingface-hub
+transformers
+torch
+accelerate
 python-dotenv

@@ -16,8 +16,8 @@ __pycache__/
 .venv/
 venv/
 
-# Old source folder
-src/
+# Old root src/ folder (not frontend/src/)
+/src/
 
 # Build output
 frontend/dist/
