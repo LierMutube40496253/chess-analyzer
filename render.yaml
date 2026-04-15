@@ -6,12 +6,16 @@ services:
     dockerfilePath: ./Dockerfile
     envVars:
       - key: LLM_PROVIDER
-        value: gemini
+        value: groq
+      - key: GROQ_MODEL
+        value: llama-3.3-70b-versatile
+      - key: GROQ_API_KEY
+        sync: false          # set this in Render dashboard
       - key: GEMINI_API_KEY
-        sync: false          # you set this in Render dashboard
+        sync: false          # fallback — set this in Render dashboard
       - key: GEMINI_MODEL
-        value: gemini-1.5-flash
+        value: gemini-2.0-flash
       - key: STOCKFISH_PATH
         value: /usr/games/stockfish
       - key: DEBUG
-        value: false
+        value: "false"

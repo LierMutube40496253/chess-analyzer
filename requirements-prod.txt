@@ -1,0 +1,7 @@
+flask
+flask-cors
+requests
+python-chess
+groq
+google-genai
+python-dotenv

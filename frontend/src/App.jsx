@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
-import { parsePGN, sanToSquares, CLASSIFICATION_COLOR } from './utils/chess'
+import api from './api'
+import { parsePGN, sanToSquares } from './utils/chess'
 import ChessgroundBoard from './components/ChessgroundBoard'
 import EvalBar from './components/EvalBar'
 import EvalGraph from './components/EvalGraph'
@@ -32,7 +32,7 @@ export default function App() {
     setAnalyses([])
     setLoading(true)
     try {
-      const res = await axios.post('/analyze', { pgn })
+      const res = await api.post('/analyze', { pgn })
       setAnalyses(res.data)
     } catch (e) {
       setError(e.response?.data?.error || 'Analysis failed. Is the backend running?')
@@ -60,10 +60,6 @@ export default function App() {
 
   const bestSquares = currentAnalysis?.best_move && currentPos?.fen
     ? sanToSquares(currentPos.fen, currentAnalysis.best_move) : null
-
-  const clsColor = currentAnalysis
-    ? CLASSIFICATION_COLOR[currentAnalysis.classification] + '99'
-    : undefined
 
   const whiteAccuracy = calcAccuracy(analyses, 'white')
   const blackAccuracy = calcAccuracy(analyses, 'black')

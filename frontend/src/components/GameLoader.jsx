@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import axios from 'axios'
+import api from '../api'
 
 export default function GameLoader({ onLoad, loading, error }) {
   const [username, setUsername] = useState('')
@@ -13,7 +13,7 @@ export default function GameLoader({ onLoad, loading, error }) {
     setFetchError(null)
     setGames([])
     try {
-      const res = await axios.get(`/games/${username.trim()}`)
+      const res = await api.get(`/games/${username.trim()}`)
       if (res.data.length === 0) setFetchError('No games found.')
       else setGames(res.data)
     } catch {
