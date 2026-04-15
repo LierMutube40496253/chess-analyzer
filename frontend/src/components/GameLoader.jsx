@@ -13,11 +13,17 @@ export default function GameLoader({ onLoad, loading, error }) {
     setFetchError(null)
     setGames([])
     try {
-      const res = await api.get(`/games/${username.trim()}`)
-      if (res.data.length === 0) setFetchError('No games found.')
+      const res = await api.get(`/games/${username.trim()}`, { timeout: 60000 })
+      if (res.data.length === 0) setFetchError('No games found for this username this month.')
       else setGames(res.data)
-    } catch {
-      setFetchError('Could not fetch games. Check the username.')
+    } catch (e) {
+      if (e.code === 'ECONNABORTED' || e.message?.includes('timeout')) {
+        setFetchError('Server is waking up (free tier sleeps). Wait 30s and try again.')
+      } else if (e.response?.status === 404) {
+        setFetchError('Username not found on chess.com.')
+      } else {
+        setFetchError(`Error: ${e.response?.data?.error || e.message || 'Could not reach server.'}`)
+      }
     } finally {
       setFetching(false)
     }

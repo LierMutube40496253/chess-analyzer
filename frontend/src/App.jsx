@@ -32,10 +32,14 @@ export default function App() {
     setAnalyses([])
     setLoading(true)
     try {
-      const res = await api.post('/analyze', { pgn })
+      const res = await api.post('/analyze', { pgn }, { timeout: 300000 })
       setAnalyses(res.data)
     } catch (e) {
-      setError(e.response?.data?.error || 'Analysis failed. Is the backend running?')
+      if (e.code === 'ECONNABORTED') {
+        setError('Server timed out. Try again — it may have been waking up.')
+      } else {
+        setError(e.response?.data?.error || 'Analysis failed. Is the backend running?')
+      }
     } finally {
       setLoading(false)
     }
