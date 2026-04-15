@@ -117,7 +117,7 @@ export default function App() {
           {loading && (
             <div className="loading-state">
               <div className="spinner" />
-              <p>Analyzing with Stockfish + Gemini…</p>
+              <p>Analyzing with Stockfish…</p>
             </div>
           )}
 
